@@ -1,9 +1,13 @@
 // SPDX-License-Identifier: Apache-2.0
 pragma solidity ^0.8.27;
 
-import {PoCToken} from "./PoCToken.sol";
 import {IERC20} from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import {Ownable} from "@openzeppelin/contracts/access/Ownable.sol";
+
+interface IPoCToken is IERC20 {
+    function mint(address to, uint256 amount) external;
+    function burn(uint256 value) external;
+}
 
 contract PoC is Ownable {
     error InvalidToken();
@@ -17,7 +21,7 @@ contract PoC is Ownable {
         ENABLED
     }
 
-    PoCToken public pocToken;
+    IPoCToken public pocToken;
     mapping (address => TOKEN_STATUS) public paymentToken;
 
     event OrderedWithToken(address indexed user, uint256 indexed orderId, address token, uint256 total, uint256 points, uint256 timestamp);
@@ -25,6 +29,7 @@ contract PoC is Ownable {
     event Refunded(address indexed to, address token, uint256 amount, uint256 timestamp);
     event PaymentTokenSet(address indexed token, TOKEN_STATUS status, uint256 timestamp);
     event PocTokensMinted(address indexed to, uint256 amount, uint256 timestamp);
+    event PocTokensBurned(uint256 amount, uint256 timestamp);
     event PoCTokenSet(address token, uint256 timestamp);
     
     constructor(address initialOwner, address[] memory initialPaymentTokens) Ownable(initialOwner) {
@@ -44,7 +49,7 @@ contract PoC is Ownable {
     }
 
     modifier enabledToken(address token) {
-        if (paymentToken[token] == TOKEN_STATUS.DISABLED) {
+        if (paymentToken[token] == TOKEN_STATUS.DISABLED || token != address(pocToken)) {
             revert DisabledToken();
         }
         _;
@@ -52,7 +57,7 @@ contract PoC is Ownable {
 
     function setPoCToken(address token) external onlyOwner validToken(token) {
         if (address(pocToken) != address(0)) revert PoCTokenAlreadySet();
-        pocToken = PoCToken(token);
+        pocToken = IPoCToken(token);
         emit PoCTokenSet(token, block.timestamp);
     }
 
@@ -61,7 +66,7 @@ contract PoC is Ownable {
         if (IERC20(token).balanceOf(msg.sender) < total) revert InsufficientBalance();
         if (points > 0) {
             if (pocToken.balanceOf(msg.sender) < points) revert InsufficientBalance();
-            pocToken.burnFrom(msg.sender, points);
+            pocToken.transferFrom(msg.sender, address(this), points);
         }
         IERC20(token).transferFrom(msg.sender, address(this), total);
         emit OrderedWithToken(msg.sender, orderId, token, total, points, block.timestamp);
@@ -82,14 +87,24 @@ contract PoC is Ownable {
         emit PaymentTokenSet(token, status, block.timestamp);
     }
 
-    function mintPoCTokens(address to, uint256 amount) external onlyOwner {
-        pocToken.mint(to, amount);
-        emit PocTokensMinted(to, amount, block.timestamp);
+    function markOrderCompleted(address user, uint256 mintAmount, uint256 burnAmount) external onlyOwner {
+        if (mintAmount > 0) _mintPoCTokens(user, mintAmount);
+        if (burnAmount > 0) _burnPoCTokens(burnAmount);
+    }
+
+    function _mintPoCTokens(address to, uint256 mintAmount) internal {
+        pocToken.mint(to, mintAmount);
+        emit PocTokensMinted(to, mintAmount, block.timestamp);
+    }
+
+    function _burnPoCTokens(uint256 burnAmount) internal {
+        pocToken.burn(burnAmount);
+        emit PocTokensBurned(burnAmount, block.timestamp);
     }
 
     receive() external payable {}
     fallback() external payable {}
 }
 
-// PoC: https://arbiscan.io/address/0x2d92bC3b28e8E43De63477d6d4007795Fb4d964C
-// PoCToken: https://arbiscan.io/address/0x06317B6009e39Dbcd49d6654e08363FDC17e88a9
+// PoC: https://arbiscan.io/address/0xA7Ff9FD09eD70c174Ae9CB580FB6b31325869a05
+// PoCToken: https://arbiscan.io/address/0x5d05133f9dE9892688831613C0A3cB80B4cB2D22

@@ -1,0 +1,758 @@
+{
+	"compiler": {
+		"version": "0.8.30+commit.73712a01"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "spender",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "allowance",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "needed",
+						"type": "uint256"
+					}
+				],
+				"name": "ERC20InsufficientAllowance",
+				"type": "error"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "sender",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "balance",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "needed",
+						"type": "uint256"
+					}
+				],
+				"name": "ERC20InsufficientBalance",
+				"type": "error"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "approver",
+						"type": "address"
+					}
+				],
+				"name": "ERC20InvalidApprover",
+				"type": "error"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "receiver",
+						"type": "address"
+					}
+				],
+				"name": "ERC20InvalidReceiver",
+				"type": "error"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "sender",
+						"type": "address"
+					}
+				],
+				"name": "ERC20InvalidSender",
+				"type": "error"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "spender",
+						"type": "address"
+					}
+				],
+				"name": "ERC20InvalidSpender",
+				"type": "error"
+			},
+			{
+				"inputs": [],
+				"name": "ERC7818TransferredExpiredToken",
+				"type": "error"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "owner",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "spender",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "value",
+						"type": "uint256"
+					}
+				],
+				"name": "Approval",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "from",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "to",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "value",
+						"type": "uint256"
+					}
+				],
+				"name": "Transfer",
+				"type": "event"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "owner",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "spender",
+						"type": "address"
+					}
+				],
+				"name": "allowance",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "spender",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "value",
+						"type": "uint256"
+					}
+				],
+				"name": "approve",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "account",
+						"type": "address"
+					}
+				],
+				"name": "balanceOf",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "epoch",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "account",
+						"type": "address"
+					}
+				],
+				"name": "balanceOfAtEpoch",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "currentEpoch",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "decimals",
+				"outputs": [
+					{
+						"internalType": "uint8",
+						"name": "",
+						"type": "uint8"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "epochLength",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "epochType",
+				"outputs": [
+					{
+						"internalType": "enum IERC7818.EPOCH_TYPE",
+						"name": "",
+						"type": "uint8"
+					}
+				],
+				"stateMutability": "pure",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "pointer",
+						"type": "uint256"
+					}
+				],
+				"name": "getWorldStateBalance",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
+					}
+				],
+				"name": "isEpochExpired",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "name",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "symbol",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "account",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "epoch",
+						"type": "uint256"
+					}
+				],
+				"name": "tokenList",
+				"outputs": [
+					{
+						"internalType": "uint256[]",
+						"name": "list",
+						"type": "uint256[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "totalSupply",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "pure",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "to",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "value",
+						"type": "uint256"
+					}
+				],
+				"name": "transfer",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "epoch",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "to",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "value",
+						"type": "uint256"
+					}
+				],
+				"name": "transferAtEpoch",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "from",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "to",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "value",
+						"type": "uint256"
+					}
+				],
+				"name": "transferFrom",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "epoch",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "from",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "to",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "value",
+						"type": "uint256"
+					}
+				],
+				"name": "transferFromAtEpoch",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "validityDuration",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"author": "Kiwari Labs",
+			"errors": {
+				"ERC20InsufficientAllowance(address,uint256,uint256)": [
+					{
+						"details": "Indicates a failure with the `spender`’s `allowance`. Used in transfers.",
+						"params": {
+							"allowance": "Amount of tokens a `spender` is allowed to operate with.",
+							"needed": "Minimum amount required to perform a transfer.",
+							"spender": "Address that may be allowed to operate on tokens without being their owner."
+						}
+					}
+				],
+				"ERC20InsufficientBalance(address,uint256,uint256)": [
+					{
+						"details": "Indicates an error related to the current `balance` of a `sender`. Used in transfers.",
+						"params": {
+							"balance": "Current balance for the interacting account.",
+							"needed": "Minimum amount required to perform a transfer.",
+							"sender": "Address whose tokens are being transferred."
+						}
+					}
+				],
+				"ERC20InvalidApprover(address)": [
+					{
+						"details": "Indicates a failure with the `approver` of a token to be approved. Used in approvals.",
+						"params": {
+							"approver": "Address initiating an approval operation."
+						}
+					}
+				],
+				"ERC20InvalidReceiver(address)": [
+					{
+						"details": "Indicates a failure with the token `receiver`. Used in transfers.",
+						"params": {
+							"receiver": "Address to which tokens are being transferred."
+						}
+					}
+				],
+				"ERC20InvalidSender(address)": [
+					{
+						"details": "Indicates a failure with the token `sender`. Used in transfers.",
+						"params": {
+							"sender": "Address whose tokens are being transferred."
+						}
+					}
+				],
+				"ERC20InvalidSpender(address)": [
+					{
+						"details": "Indicates a failure with the `spender` to be approved. Used in approvals.",
+						"params": {
+							"spender": "Address that may be allowed to operate on tokens without being their owner."
+						}
+					}
+				],
+				"ERC7818TransferredExpiredToken()": [
+					{
+						"details": "This error is triggered when a transfer operation is attempted for a token that is past its validity period."
+					}
+				]
+			},
+			"events": {
+				"Approval(address,address,uint256)": {
+					"details": "Emitted when the allowance of a `spender` for an `owner` is set by a call to {approve}. `value` is the new allowance."
+				},
+				"Transfer(address,address,uint256)": {
+					"details": "Emitted when `value` tokens are moved from one account (`from`) to another (`to`). Note that `value` may be zero."
+				}
+			},
+			"kind": "dev",
+			"methods": {
+				"allowance(address,address)": {
+					"details": "See {IERC20-allowance}."
+				},
+				"approve(address,uint256)": {
+					"details": "See {IERC20-approve}."
+				},
+				"balanceOf(address)": {
+					"details": "Calculates and returns the available balance based on the frame.See {IERC20-balanceOf}."
+				},
+				"balanceOfAtEpoch(uint256,address)": {
+					"details": "See {IERC7818-balanceOfAtEpoch}."
+				},
+				"currentEpoch()": {
+					"details": "See {IERC7818-currentEpoch}."
+				},
+				"decimals()": {
+					"details": "See {IERC20Metadata-decimals}."
+				},
+				"epochLength()": {
+					"details": "See {IERC7818-epochLength}."
+				},
+				"epochType()": {
+					"details": "See {IERC7818-epochType}."
+				},
+				"getWorldStateBalance(uint256)": {
+					"details": "This function returns the balance of the given block from the internal `_worldStateBalances` mapping.",
+					"params": {
+						"pointer": "The block number for which the balance is being queried."
+					},
+					"returns": {
+						"_0": "balance The total balance stored at the given block number."
+					}
+				},
+				"isEpochExpired(uint256)": {
+					"details": "See {IERC7818-isEpochExpired}."
+				},
+				"name()": {
+					"details": "See {IERC20Metadata-name}."
+				},
+				"symbol()": {
+					"details": "See {IERC20Metadata-symbol}."
+				},
+				"tokenList(address,uint256)": {
+					"custom:gas-inefficiency": "if not limit the size of array"
+				},
+				"totalSupply()": {
+					"details": "This function returns the total supply of tokens, which is constant and set to 0.See {IERC20-totalSupply}."
+				},
+				"transfer(address,uint256)": {
+					"details": "See {IERC20-transfer}."
+				},
+				"transferAtEpoch(uint256,address,uint256)": {
+					"details": "See {IERC7818-transferAtEpoch}."
+				},
+				"transferFrom(address,address,uint256)": {
+					"details": "See {IERC20-transferFrom}."
+				},
+				"transferFromAtEpoch(uint256,address,address,uint256)": {
+					"details": "See {IERC7818-transferFromAtEpoch}."
+				},
+				"validityDuration()": {
+					"details": "See {IERC7818-validityDuration}."
+				}
+			},
+			"title": "ERC20EXP Base",
+			"version": 1
+		},
+		"userdoc": {
+			"errors": {
+				"ERC7818TransferredExpiredToken()": [
+					{
+						"notice": "Thrown when an attempt is made to transfer a token that has expired."
+					}
+				]
+			},
+			"kind": "user",
+			"methods": {
+				"balanceOf(address)": {
+					"notice": "Returns the available balance of tokens for a given account."
+				},
+				"getWorldStateBalance(uint256)": {
+					"notice": "Retrieves the total balance stored at a specific block."
+				},
+				"totalSupply()": {
+					"notice": "Returns 0 as there is no actual total supply due to token expiration."
+				}
+			},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			".deps/npm/@kiwarilabs/contracts/tokens/ERC20/ERC20EXPBase.sol": "ERC20EXPBase"
+		},
+		"evmVersion": "prague",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		".deps/npm/@kiwarilabs/contracts/tokens/ERC20/ERC20EXPBase.sol": {
+			"keccak256": "0xaad9949d9060f401a87e2fea43aa9523774b3d97d029b309e22a803cdc12ad45",
+			"license": "Apache-2.0",
+			"urls": [
+				"bzz-raw://a48496c0349825f1c9ada8fe0104f3e20517fda69f35dc78ac10b3f84e55b8e3",
+				"dweb:/ipfs/QmTgTjdyN2ygLUCo6DuTVRFk67MbWVG4iTEQveYy3tGrns"
+			]
+		},
+		".deps/npm/@kiwarilabs/contracts/tokens/ERC20/interfaces/IERC7818.sol": {
+			"keccak256": "0xf609ec2c2afa1243cce40c5d8825b5fdeeb4ff1fb11955b4703c63be138a410b",
+			"license": "Apache-2.0",
+			"urls": [
+				"bzz-raw://7cd7f2b4d25d6a49332c5f8ac1799c9c76a6df80617d229074831a06d2994e39",
+				"dweb:/ipfs/QmWbaLT9L2fJh7eM8xM6ugjQ8ufqZooU9RnC96pDv8iwNP"
+			]
+		},
+		".deps/npm/@kiwarilabs/contracts/utils/datastructures/LSCDLL.sol": {
+			"keccak256": "0x87e4c9a22be292ce2bfaba8bec89809f3f3e056a15e5cf2d66ca67a54283579c",
+			"license": "Apache-2.0",
+			"urls": [
+				"bzz-raw://241c161c47ca8f331fd76ec160baef6bba2adfc993e45926d0b028e954c638db",
+				"dweb:/ipfs/QmTi4zyr1R63waPnX9uyJy6bpRiV9Eez8PaDQF3TdfXfZm"
+			]
+		},
+		"@openzeppelin/contracts/interfaces/draft-IERC6093.sol": {
+			"keccak256": "0x19fdfb0f3b89a230e7dbd1cf416f1a6b531a3ee5db4da483f946320fc74afc0e",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://3490d794728f5bfecb46820431adaff71ba374141545ec20b650bb60353fac23",
+				"dweb:/ipfs/QmPsfxjVpMcZbpE7BH93DzTpEaktESigEw4SmDzkXuJ4WR"
+			]
+		},
+		"@openzeppelin/contracts/token/ERC20/IERC20.sol": {
+			"keccak256": "0x74ed01eb66b923d0d0cfe3be84604ac04b76482a55f9dd655e1ef4d367f95bc2",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://5282825a626cfe924e504274b864a652b0023591fa66f06a067b25b51ba9b303",
+				"dweb:/ipfs/QmeCfPykghhMc81VJTrHTC7sF6CRvaA1FXVq2pJhwYp1dV"
+			]
+		},
+		"@openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata.sol": {
+			"keccak256": "0xd6fa4088198f04eef10c5bce8a2f4d60554b7ec4b987f684393c01bf79b94d9f",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://f95ee0bbd4dd3ac730d066ba3e785ded4565e890dbec2fa7d3b9fe3bad9d0d6e",
+				"dweb:/ipfs/QmSLr6bHkPFWT7ntj34jmwfyskpwo97T9jZUrk5sz3sdtR"
+			]
+		},
+		"@openzeppelin/contracts/utils/Context.sol": {
+			"keccak256": "0x493033a8d1b176a037b2cc6a04dad01a5c157722049bbecf632ca876224dd4b2",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://6a708e8a5bdb1011c2c381c9a5cfd8a9a956d7d0a9dc1bd8bcdaf52f76ef2f12",
+				"dweb:/ipfs/Qmax9WHBnVsZP46ZxEMNRQpLQnrdE4dK8LehML1Py8FowF"
+			]
+		}
+	},
+	"version": 1
+}

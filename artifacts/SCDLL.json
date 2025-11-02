@@ -1,0 +1,84 @@
+{
+	"deploy": {
+		"VM:-": {
+			"linkReferences": {},
+			"autoDeployLib": true
+		},
+		"main:1": {
+			"linkReferences": {},
+			"autoDeployLib": true
+		},
+		"ropsten:3": {
+			"linkReferences": {},
+			"autoDeployLib": true
+		},
+		"rinkeby:4": {
+			"linkReferences": {},
+			"autoDeployLib": true
+		},
+		"kovan:42": {
+			"linkReferences": {},
+			"autoDeployLib": true
+		},
+		"goerli:5": {
+			"linkReferences": {},
+			"autoDeployLib": true
+		},
+		"Custom": {
+			"linkReferences": {},
+			"autoDeployLib": true
+		}
+	},
+	"data": {
+		"bytecode": {
+			"functionDebugData": {},
+			"generatedSources": [],
+			"linkReferences": {},
+			"object": "6055604b600b8282823980515f1a607314603f577f4e487b71000000000000000000000000000000000000000000000000000000005f525f60045260245ffd5b305f52607381538281f3fe730000000000000000000000000000000000000000301460806040525f5ffdfea2646970667358221220a56820c7231726b1f997b91a3d0120b4ac9ece98b6edbf92107f06bd4218453f64736f6c634300081e0033",
+			"opcodes": "PUSH1 0x55 PUSH1 0x4B PUSH1 0xB DUP3 DUP3 DUP3 CODECOPY DUP1 MLOAD PUSH0 BYTE PUSH1 0x73 EQ PUSH1 0x3F JUMPI PUSH32 0x4E487B7100000000000000000000000000000000000000000000000000000000 PUSH0 MSTORE PUSH0 PUSH1 0x4 MSTORE PUSH1 0x24 PUSH0 REVERT JUMPDEST ADDRESS PUSH0 MSTORE PUSH1 0x73 DUP2 MSTORE8 DUP3 DUP2 RETURN INVALID PUSH20 0x0 ADDRESS EQ PUSH1 0x80 PUSH1 0x40 MSTORE PUSH0 PUSH0 REVERT INVALID LOG2 PUSH5 0x6970667358 0x22 SLT KECCAK256 0xA5 PUSH9 0x20C7231726B1F997B9 BYTE RETURNDATASIZE ADD KECCAK256 0xB4 0xAC SWAP15 0xCE SWAP9 0xB6 0xED 0xBF SWAP3 LT PUSH32 0x6BD4218453F64736F6C634300081E0033000000000000000000000000000000 ",
+			"sourceMap": "319:17165:0:-:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;"
+		},
+		"deployedBytecode": {
+			"functionDebugData": {},
+			"generatedSources": [],
+			"immutableReferences": {},
+			"linkReferences": {},
+			"object": "730000000000000000000000000000000000000000301460806040525f5ffdfea2646970667358221220a56820c7231726b1f997b91a3d0120b4ac9ece98b6edbf92107f06bd4218453f64736f6c634300081e0033",
+			"opcodes": "PUSH20 0x0 ADDRESS EQ PUSH1 0x80 PUSH1 0x40 MSTORE PUSH0 PUSH0 REVERT INVALID LOG2 PUSH5 0x6970667358 0x22 SLT KECCAK256 0xA5 PUSH9 0x20C7231726B1F997B9 BYTE RETURNDATASIZE ADD KECCAK256 0xB4 0xAC SWAP15 0xCE SWAP9 0xB6 0xED 0xBF SWAP3 LT PUSH32 0x6BD4218453F64736F6C634300081E0033000000000000000000000000000000 ",
+			"sourceMap": "319:17165:0:-:0;;;;;;;;"
+		},
+		"gasEstimates": {
+			"creation": {
+				"codeDepositCost": "17000",
+				"executionCost": "92",
+				"totalCost": "17092"
+			},
+			"internal": {
+				"_partition(struct SCDLL.List storage pointer,uint256,bool)": "infinite",
+				"_path(struct SCDLL.List storage pointer,uint256,bool)": "infinite",
+				"_traversal(struct SCDLL.List storage pointer,bool)": "infinite",
+				"ascending(struct SCDLL.List storage pointer)": "infinite",
+				"descending(struct SCDLL.List storage pointer)": "infinite",
+				"exist(struct SCDLL.List storage pointer,uint256)": "infinite",
+				"firstPartition(struct SCDLL.List storage pointer)": "infinite",
+				"head(struct SCDLL.List storage pointer)": "infinite",
+				"insert(struct SCDLL.List storage pointer,uint256)": "infinite",
+				"lazyShrink(struct SCDLL.List storage pointer,uint256)": "infinite",
+				"middle(struct SCDLL.List storage pointer)": "infinite",
+				"next(struct SCDLL.List storage pointer,uint256)": "infinite",
+				"node(struct SCDLL.List storage pointer,uint256)": "infinite",
+				"partition(struct SCDLL.List storage pointer,uint256)": "infinite",
+				"pathToHead(struct SCDLL.List storage pointer,uint256)": "infinite",
+				"pathToTail(struct SCDLL.List storage pointer,uint256)": "infinite",
+				"previous(struct SCDLL.List storage pointer,uint256)": "infinite",
+				"remove(struct SCDLL.List storage pointer,uint256)": "infinite",
+				"secondPartition(struct SCDLL.List storage pointer)": "infinite",
+				"shrink(struct SCDLL.List storage pointer,uint256)": "infinite",
+				"size(struct SCDLL.List storage pointer)": "infinite",
+				"tail(struct SCDLL.List storage pointer)": "infinite"
+			}
+		},
+		"methodIdentifiers": {}
+	},
+	"abi": []
+}

@@ -20,7 +20,7 @@ contract PoC is Ownable {
     PoCToken public pocToken;
     mapping (address => TOKEN_STATUS) public paymentToken;
 
-    event OrderedWithToken(address indexed user, uint256 indexed orderId, address token, uint256 total, uint256 totalIdr, uint256 points, uint256 timestamp);
+    event OrderedWithToken(address indexed user, uint256 indexed orderId, address token, uint256 total, uint256 points, uint256 timestamp);
     event Withdrawn(address indexed owner, address token, uint256 amount, uint256 timestamp);
     event Refunded(address indexed to, address token, uint256 amount, uint256 timestamp);
     event PaymentTokenSet(address indexed token, TOKEN_STATUS status, uint256 timestamp);
@@ -56,7 +56,7 @@ contract PoC is Ownable {
         emit PoCTokenSet(token, block.timestamp);
     }
 
-    function orderWithToken(uint256 orderId, address token, uint256 total, uint256 totalIdr, uint256 points) external validToken(token) enabledToken(token) {
+    function orderWithToken(uint256 orderId, address token, uint256 total, uint256 points) external validToken(token) enabledToken(token) {
         if (total == 0) revert InvalidAmount(total);
         if (IERC20(token).balanceOf(msg.sender) < total) revert InsufficientBalance();
         if (points > 0) {
@@ -64,7 +64,7 @@ contract PoC is Ownable {
             pocToken.burnFrom(msg.sender, points);
         }
         IERC20(token).transferFrom(msg.sender, address(this), total);
-        emit OrderedWithToken(msg.sender, orderId, token, total, totalIdr, points, block.timestamp);
+        emit OrderedWithToken(msg.sender, orderId, token, total, points, block.timestamp);
     }
 
     function refund(address token, address to, uint256 amount) external onlyOwner validToken(token) enabledToken(token) {
@@ -91,5 +91,5 @@ contract PoC is Ownable {
     fallback() external payable {}
 }
 
-// PoC: https://arbiscan.io/address/0x7afa6498ff856a5b5c02eb290c6b4019d312b38d
-// PoCToken: https://arbiscan.io/address/0x4f3c9eAAF79A07A46F69b8AF3F9cA564ba21e1Da
+// PoC: https://arbiscan.io/address/0x2d92bC3b28e8E43De63477d6d4007795Fb4d964C
+// PoCToken: https://arbiscan.io/address/0x06317B6009e39Dbcd49d6654e08363FDC17e88a9
